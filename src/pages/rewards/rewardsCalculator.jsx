@@ -1,4 +1,5 @@
 import React from "react";
+import { GetAllOrders, GetEligibleOrders } from "../../api/OrdersService";
 
 export default class RewardsCalculator extends React.Component {
     constructor(props) {
@@ -7,20 +8,29 @@ export default class RewardsCalculator extends React.Component {
         this.onChange = this.onChange.bind(this);
     }
 
+    componentDidMount() {
+        this.GetOrders();
+    }
+
     onChange(event) {
         this.setState({totalEstimate: event.target.value});
     }
 
     GetOrders() {
-        console.log("Get Orders not yet implemented.");
-        return null;
+        GetEligibleOrders().then(eligibleOrders => {
+            this.CalculatePointsFromOrders(eligibleOrders);
+        });
     }
     
     CalculatePointsFromOrders(orders) {
         let orderTotal = 0;
         orders.forEach(order => {
-            orderTotal += order.price;
+            order.items.forEach(item => {
+                orderTotal += item.price;
+            });
         });
+
+        console.log("Order Total:" + orderTotal);
     
         return this.CalculatePointsFromTotal(orderTotal);
     }

@@ -1,6 +1,86 @@
 {
     "orders": [
         {
+            "timeOfPurchase": "1598894911",
+            "items": [
+                {
+                    "name" : "Random Plant",
+                    "price" : 25,
+                    "id": "00000000"
+                }
+            ]
+        },
+        {
+            "timeOfPurchase": "1596992213",
+            "items": [
+                {
+                    "name" : "Another Random Plant",
+                    "price" : 50,
+                    "id": "00000000"
+                }
+            ]
+        },
+        {
+            "timeOfPurchase": "1597155717",
+            "items": [
+                {
+                    "name" : "Random Plant",
+                    "price" : 25,
+                    "id": "00000000"
+                },
+                {
+                    "name" : "Another Random Plant",
+                    "price" : 50,
+                    "id": "00000000"
+                },
+                {
+                    "name" : "Yet Another Random Plant",
+                    "price" : 80,
+                    "id": "00000000"
+                }
+            ]
+        },
+        {
+            "timeOfPurchase": "1596471463",
+            "items": [
+                {
+                    "name" : "Random Plant",
+                    "price" : 25,
+                    "id": "00000000"
+                }
+            ]
+        },
+        {
+            "timeOfPurchase": "1596183476",
+            "items": [
+                {
+                    "name" : "Another Random Plant",
+                    "price" : 50,
+                    "id": "00000000"
+                }
+            ]
+        },
+        {
+            "timeOfPurchase": "1595140950",
+            "items": [
+                {
+                    "name" : "Random Plant",
+                    "price" : 25,
+                    "id": "00000000"
+                },
+                {
+                    "name" : "Another Random Plant",
+                    "price" : 50,
+                    "id": "00000000"
+                },
+                {
+                    "name" : "Yet Another Random Plant",
+                    "price" : 80,
+                    "id": "00000000"
+                }
+            ]
+        },
+        {
             "timeOfPurchase": "1662927977",
             "items": [
                 {

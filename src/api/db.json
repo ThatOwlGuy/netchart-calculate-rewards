@@ -2,11 +2,43 @@
     "orders": [
         {
             "timeOfPurchase": "1662927977",
-            "item": {
-                "name" : "Random Plant",
-                "price" : 25,
-                "id": "00000000"
-            }
+            "items": [
+                {
+                    "name" : "Random Plant",
+                    "price" : 25,
+                    "id": "00000000"
+                }
+            ]
+        },
+        {
+            "timeOfPurchase": "1662927977",
+            "items": [
+                {
+                    "name" : "Another Random Plant",
+                    "price" : 50,
+                    "id": "00000000"
+                }
+            ]
+        },
+        {
+            "timeOfPurchase": "1662927978",
+            "items": [
+                {
+                    "name" : "Random Plant",
+                    "price" : 25,
+                    "id": "00000000"
+                },
+                {
+                    "name" : "Another Random Plant",
+                    "price" : 50,
+                    "id": "00000000"
+                },
+                {
+                    "name" : "Yet Another Random Plant",
+                    "price" : 80,
+                    "id": "00000000"
+                }
+            ]
         }
     ]
 }

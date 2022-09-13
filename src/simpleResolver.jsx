@@ -11,7 +11,7 @@ export default function SimpleResolver(path)
             component = <Home />;
             break;
         case "/rewards":
-            component = <RewardsCalculator />;
+            component = <RewardsCalculator />
             break;
         default:
             component = <Error />;

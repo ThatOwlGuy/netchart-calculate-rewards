@@ -8,11 +8,13 @@ export default class RewardsCalculator extends React.Component {
         this.state = {
             totalEstimate: 0,
             rewards: 0,
-            hasCalculated: false
+            hasCalculated: false,
+            failedCalculation: false
         };
         this.onChange = this.onChange.bind(this);
         this.rewards = this.CalculateRewards.bind(this);
         this.hasCalculated = this.CalculateRewards.bind(this);
+        this.failedCalculation = this.CalculateRewards(this);
     }
 
     componentDidMount() {
@@ -32,6 +34,16 @@ export default class RewardsCalculator extends React.Component {
         }).then(() => {
             this.setState({
                 hasCalculated: true
+            });
+            this.setState({
+                failedCalculation: false
+            });
+        }).catch((error) => {
+            this.setState({
+                hasCalculated: false
+            });
+            this.setState({
+                failedCalculation: true
             });
         });
     }
@@ -103,13 +115,29 @@ export default class RewardsCalculator extends React.Component {
                     {this.RewardsEstimator()}
                 </div>
                 <div className="info-panel">
-                    <center>
-                        <SiThymeleaf className="icon-button" size={100}></SiThymeleaf>
-                        <br/><br/><br/>
-                        <h1>Rewards!</h1>
-                        <br/>
-                        {this.state.hasCalculated && (<h2>You have accrued {this.state.rewards} plant points!</h2>)}
-                    </center>
+                    {!this.state.failedCalculation && (
+                        <center>
+                            <SiThymeleaf className="icon-button" size={100}></SiThymeleaf>
+                            <br/><br/><br/>
+                            <h1>Rewards!</h1>
+                            <br/>
+                        </center>
+                    )}
+                    {this.state.hasCalculated && (<h2>You have accrued {this.state.rewards} plant points!</h2>)}
+                    {this.state.failedCalculation && (
+                        <>
+                        <center>
+                            <h1>Sorry!</h1>
+                            <h3>It seems that we were unable fetch your order history for calculation. Please try again later!</h3>
+                            <p>(Are you running the backend? If not, try running the below command in the project directory)</p>
+                        </center>
+                        <pre>
+                            <code>
+                                $ json-server --watch src/api/db.json --port 3001
+                            </code>
+                        </pre>
+                        </>
+                    )}
                 </div>
             </div>
         );

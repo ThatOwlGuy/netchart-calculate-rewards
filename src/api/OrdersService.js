@@ -8,7 +8,7 @@ export async function GetAllOrders() {
 export async function GetEligibleOrders() {
     return await GetAllOrders().then(result => {
         let thirtyDaysAgo = new Date();
-        thirtyDaysAgo.setMonth(thirtyDaysAgo.getMonth()-1);
+        thirtyDaysAgo.setMonth(thirtyDaysAgo.getMonth()-3);
         let filteredResults = result.filter(order => {
             return parseInt(order.timeOfPurchase) > GetEpoch(thirtyDaysAgo);
         });

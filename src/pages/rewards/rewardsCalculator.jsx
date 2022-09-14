@@ -123,7 +123,7 @@ export default class RewardsCalculator extends React.Component {
                             <br/>
                         </center>
                     )}
-                    {this.state.hasCalculated && (<h2>You have accrued {this.state.rewards} plant points!</h2>)}
+                    {this.state.hasCalculated && (<center><h2>You have accrued {this.state.rewards} plant points!</h2></center>)}
                     {this.state.failedCalculation && (
                         <>
                         <center>

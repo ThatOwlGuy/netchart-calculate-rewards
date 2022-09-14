@@ -1,38 +1,52 @@
 import React from "react";
 import { GetAllOrders, GetEligibleOrders } from "../../api/OrdersService";
+import { SiThymeleaf } from "react-icons/si";
 
 export default class RewardsCalculator extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { totalEstimate: 0 };
+        this.state = {
+            totalEstimate: 0,
+            rewards: 0,
+            hasCalculated: false
+        };
         this.onChange = this.onChange.bind(this);
+        this.rewards = this.CalculateRewards.bind(this);
+        this.hasCalculated = this.CalculateRewards.bind(this);
     }
 
     componentDidMount() {
-        this.GetOrders();
+        this.CalculateRewards();
     }
 
     onChange(event) {
         this.setState({totalEstimate: event.target.value});
     }
 
-    GetOrders() {
+    CalculateRewards() {
         GetEligibleOrders().then(eligibleOrders => {
-            this.CalculatePointsFromOrders(eligibleOrders);
+            let points = this.CalculatePointsFromOrders(eligibleOrders);
+            this.setState({
+                rewards: points
+            });
+        }).then(() => {
+            this.setState({
+                hasCalculated: true
+            });
         });
     }
     
     CalculatePointsFromOrders(orders) {
-        let orderTotal = 0;
+        let pointTotal = 0;
         orders.forEach(order => {
+            let orderTotal = 0;
             order.items.forEach(item => {
                 orderTotal += item.price;
             });
+            pointTotal += this.CalculatePointsFromTotal(orderTotal);
         });
-
-        console.log("Order Total:" + orderTotal);
     
-        return this.CalculatePointsFromTotal(orderTotal);
+        return pointTotal;
     }
     
     CalculatePointsFromTotal(total) {
@@ -48,13 +62,55 @@ export default class RewardsCalculator extends React.Component {
         return Math.floor(pointTotal);
     }
 
+    RewardsEstimator() {
+        return (
+            <div className="flex-child widget-panel">
+                <center>
+                    <h1>Rewards Estimator</h1>
+                    <h3>Type in a dollar amount and see how many rewards you can get!</h3>
+                    <p>(You start getting rewards after your purchase exceeds $50)</p>
+                </center>
+                <br/>
+                <div className="flex-container">
+                    <h3 className="flex-child">$</h3>
+                    <input className="flex-child-input" type="number" min="0" value={this.state.value} onChange={this.onChange}></input>
+                </div>
+                <br/>
+                
+                <center>
+                    { this.state.totalEstimate > 50 && (
+                        <h2>You could be eligible for {this.CalculatePointsFromTotal(this.state.totalEstimate)} plant 
+                        point{this.state.totalEstimate == 51 ? "" : "s"} on a purchase!</h2>
+                    )}
+                    { this.state.totalEstimate <= 50 && (
+                        <h2>That's not enough to earn any plant points!</h2>
+                    )}
+                </center>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div>
-                <h1>The Rewards Calculator!</h1>
-                <h2>Rewards Estimator!</h2>
-                <input type="number" min="0" value={this.state.value} onChange={this.onChange}></input>
-                <h2>Rewards Estimate: {this.CalculatePointsFromTotal(this.state.totalEstimate)}</h2>
+                <div className="flex-container">
+                    <div className="flex-child info-panel">
+                        <h1>Thank you!</h1>
+                        <br/>
+                        <h3>You're a valued customer here @ Plant Shoppe. And for that, you get rewards!</h3>
+                        <br/><p>Below, you can see how many rewards you get from your green thumb membership. And on the right, you can see how many points you can accrue in a single purchase!</p>
+                    </div>
+                    {this.RewardsEstimator()}
+                </div>
+                <div className="info-panel">
+                    <center>
+                        <SiThymeleaf className="icon-button" size={100}></SiThymeleaf>
+                        <br/><br/><br/>
+                        <h1>Rewards!</h1>
+                        <br/>
+                        {this.state.hasCalculated && (<h2>You have accrued {this.state.rewards} plant points!</h2>)}
+                    </center>
+                </div>
             </div>
         );
     }

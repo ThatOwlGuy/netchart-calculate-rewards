@@ -2,19 +2,20 @@ const apiUrl = "http://localhost:3001/orders"
 
 export async function GetAllOrders() {
     let response = await fetch(apiUrl);
-    let data = await response.json();
-    return data;
+    return await response.json();
 }
 
 export async function GetEligibleOrders() {
-    return await GetAllOrders(0).then(result => {
-        let thirtyDaysAgo = new Date()
+    return await GetAllOrders().then(result => {
+        let thirtyDaysAgo = new Date();
         thirtyDaysAgo.setMonth(thirtyDaysAgo.getMonth()-1);
         let filteredResults = result.filter(order => {
-            let purchaseTime = new Date();
-            purchaseTime.setUTCSeconds(parseInt(order.timeOfPurchase));
-            return purchaseTime.getUTCSeconds() > thirtyDaysAgo.getUTCSeconds();
+            return parseInt(order.timeOfPurchase) > GetEpoch(thirtyDaysAgo);
         });
         return filteredResults;
     });
+}
+
+function GetEpoch(date) {
+    return Math.floor(date.getTime() / 1000);
 }

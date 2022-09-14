@@ -13,6 +13,10 @@ code {
     monospace;
 }
 
+p {
+  margin-top: 1rem;
+}
+
 .navbar-plant {
   height: 5rem;
   margin-left: -15px;
@@ -33,9 +37,9 @@ code {
   margin-right: 1rem !important;
 }
 
-.plant-icon {
+.icon-button {
   color: rgb(186, 238, 207) !important;
-  margin: 1rem;
+  margin: 0rem;
 }
 
 .dropdown-toggle::after {
@@ -77,8 +81,37 @@ code {
 }
 
 .overlay a:hover, .overlay a:focus {
-  color: #f1f1f1;
+  color: #f1f1f1 !important;
 }
+
+.info-panel {
+  border-radius: 1rem;
+  background: rgb(230, 255, 241);
+  padding: 2rem;
+  margin: 2rem 2rem;
+  box-shadow: rgb(19, 102, 52) 0rem 0.45rem 0.75rem;
+}
+
+.widget-panel {
+  border-radius: 1rem;
+  background: rgb(19, 102, 52);
+  padding: 2rem;
+  margin: 2rem 2rem;
+  color: rgb(186, 238, 207);
+  box-shadow: rgb(0, 34, 13) 0rem 0.45rem 0.75rem;
+}
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+}
+
+.flex-child-input {
+  flex: 16;
+} 
 
 @media screen and (max-height: 450px) {
   .overlay a {font-size: 20px}

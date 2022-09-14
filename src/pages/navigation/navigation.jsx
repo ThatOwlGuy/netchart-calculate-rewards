@@ -26,7 +26,7 @@ function HamburgerMenu() {
     return (
         <>
             <button className="button navbar-button" onClick={toggleNav}>
-                <GiHamburgerMenu className='plant-icon' size={35}/>
+                <GiHamburgerMenu className='icon-button' size={35}/>
             </button>
             <div className="overlay" id="mobileNav">
                 <div className="overlay-content">
